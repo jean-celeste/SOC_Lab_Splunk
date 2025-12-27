@@ -57,19 +57,19 @@ Since you only have **8 GB RAM**, keep it lean:
 
 ### Network Configuration
 
-Use **Internal Network** so all VMs can talk but are isolated.
+Use **NAT Network** so all VMs can talk but are isolated from the host network.
 
 * VirtualBox → Settings → Network
-* Adapter 1 → **Internal Network**
-* Name: `SOC-LAB`
+* Adapter 1 → **NAT Network**
+* Network Name: `192.168.1.0` (or create new NAT Network)
 
 ### IP Addressing (Static Recommended)
 
 | VM              | IP             |
 | --------------- | -------------- |
-| Ubuntu (Splunk) | 192.168.100.10 |
-| Windows 10      | 192.168.100.20 |
-| Kali Linux      | 192.168.100.30 |
+| Ubuntu (Splunk) | 192.168.1.7 |
+| Windows 10      | 192.168.1.5 |
+| Kali Linux      | 192.168.1.4 |
 
 ---
 
@@ -99,7 +99,7 @@ sudo /opt/splunk/bin/splunk enable boot-start
 From host browser:
 
 ```
-http://192.168.100.10:8000
+http://192.168.1.7:8000
 ```
 
 ### 4️⃣ Create Indexes
@@ -108,8 +108,8 @@ Settings → Indexes → New Index
 
 Create:
 
-* `windows`
-* `sysmon`
+* `windows_security` (for Windows Security and System event logs)
+* `sysmon` (for Sysmon operational logs)
 * `linux`
 * `kali`
 
@@ -122,7 +122,7 @@ Create:
 * Download Windows UF
 * During install:
 
-  * Forward to: `192.168.100.10:9997`
+  * Forward to: `192.168.1.7:9997`
   * Enable Local System account
 
 ### 2️⃣ Configure Forwarding
@@ -159,16 +159,18 @@ C:\Program Files\SplunkUniversalForwarder\etc\system\local\inputs.conf
 
 ```ini
 [WinEventLog://Security]
-index = windows
+index = windows_security
 disabled = false
 
 [WinEventLog://System]
-index = windows
+index = windows_security
 disabled = false
 
 [WinEventLog://Microsoft-Windows-Sysmon/Operational]
 index = sysmon
 disabled = false
+renderXml = true
+sourcetype = XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 ```
 
 Restart Forwarder:
@@ -192,7 +194,7 @@ sudo /opt/splunkforwarder/bin/splunk start --accept-license
 ### Forward Logs:
 
 ```bash
-sudo /opt/splunkforwarder/bin/splunk add forward-server 192.168.100.10:9997
+sudo /opt/splunkforwarder/bin/splunk add forward-server 192.168.1.7:9997
 ```
 
 Add auth logs:
@@ -211,7 +213,7 @@ index = kali
 **From Kali:**
 
 ```bash
-hydra -l admin -P /usr/share/wordlists/rockyou.txt rdp://192.168.100.20
+hydra -l admin -P /usr/share/wordlists/rockyou.txt rdp://192.168.1.5
 ```
 
 **Detection Logic:**
@@ -222,7 +224,7 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt rdp://192.168.100.20
 **Splunk SPL:**
 
 ```spl
-index=windows EventCode=4625
+index=windows_security EventCode=4625
 | stats count by Account_Name, src_ip
 | where count > 5
 ```
@@ -257,7 +259,14 @@ net localgroup administrators testuser /add
 
 **Detection:**
 
-* Event ID **4728**
+* Event ID **4728** (Member added to security-enabled local group)
+
+**Splunk SPL:**
+
+```spl
+index=windows_security EventCode=4728
+| stats count by MemberName, SubjectUserName
+```
 
 ---
 
@@ -266,13 +275,21 @@ net localgroup administrators testuser /add
 **From Kali:**
 
 ```bash
-smbclient -L //192.168.100.20 -U testuser
+smbclient -L //192.168.1.5 -U testuser
 ```
 
 **Detection:**
 
-* Event ID **4624**
-* Logon Type **3**
+* Event ID **4624** (Successful logon)
+* Logon Type **3** (Network logon)
+
+**Splunk SPL:**
+
+```spl
+index=windows_security EventCode=4624 Logon_Type=3
+| stats count by src_ip, Account_Name
+| sort -count
+```
 
 ---
 
@@ -281,12 +298,21 @@ smbclient -L //192.168.100.20 -U testuser
 **On Windows:**
 
 ```powershell
-Invoke-WebRequest -Uri http://192.168.100.30/upload
+Invoke-WebRequest -Uri http://192.168.1.4/upload
 ```
 
 **Detection:**
 
 * Sysmon Event ID **3 (Network Connection)**
+
+**Splunk SPL:**
+
+```spl
+index=sysmon EventCode=3
+| stats count by Image, DestinationIp, DestinationPort
+| where DestinationPort != 53 AND DestinationPort != 80 AND DestinationPort != 443
+| sort -count
+```
 
 ---
 
