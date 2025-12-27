@@ -1,0 +1,101 @@
+"_time","Account_Name","Group_Name","member_sid",Message
+"2025-12-27T09:23:45.038+0000","JC
+-",Administrators,"S-1-5-21-3394884509-2193508422-1494762754-1003","A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1001
+	Account Name:		JC
+	Account Domain:		DESKTOP-LOEK43C
+	Logon ID:		0x6CE4D
+
+Member:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1003
+	Account Name:		-
+
+Group:
+	Security ID:		S-1-5-32-544
+	Group Name:		Administrators
+	Group Domain:		Builtin
+
+Additional Information:
+	Privileges:		-"
+"2025-12-27T09:22:28.308+0000","JC
+-",Administrators,"S-1-5-21-3394884509-2193508422-1494762754-1002","A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1001
+	Account Name:		JC
+	Account Domain:		DESKTOP-LOEK43C
+	Logon ID:		0x6CE4D
+
+Member:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1002
+	Account Name:		-
+
+Group:
+	Security ID:		S-1-5-32-544
+	Group Name:		Administrators
+	Group Domain:		Builtin
+
+Additional Information:
+	Privileges:		-"
+"2025-12-26T08:13:20.247+0000","JC
+-",Administrators,"S-1-5-21-3394884509-2193508422-1494762754-1002","A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1001
+	Account Name:		JC
+	Account Domain:		DESKTOP-LOEK43C
+	Logon ID:		0xD3E80
+
+Member:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1002
+	Account Name:		-
+
+Group:
+	Security ID:		S-1-5-32-544
+	Group Name:		Administrators
+	Group Domain:		Builtin
+
+Additional Information:
+	Privileges:		-"
+"2025-12-25T12:25:18.352+0000","JC
+-",Administrators,"S-1-5-21-3394884509-2193508422-1494762754-1002","A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1001
+	Account Name:		JC
+	Account Domain:		DESKTOP-LOEK43C
+	Logon ID:		0x5CB87
+
+Member:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1002
+	Account Name:		-
+
+Group:
+	Security ID:		S-1-5-32-544
+	Group Name:		Administrators
+	Group Domain:		Builtin
+
+Additional Information:
+	Privileges:		-"
+"2025-12-25T11:38:49.912+0000","JC
+-",Administrators,"S-1-5-21-3394884509-2193508422-1494762754-1002","A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1001
+	Account Name:		JC
+	Account Domain:		DESKTOP-LOEK43C
+	Logon ID:		0x5CB87
+
+Member:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1002
+	Account Name:		-
+
+Group:
+	Security ID:		S-1-5-32-544
+	Group Name:		Administrators
+	Group Domain:		Builtin
+
+Additional Information:
+	Privileges:		-"

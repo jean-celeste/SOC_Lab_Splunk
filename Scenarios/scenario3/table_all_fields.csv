@@ -1,0 +1,154 @@
+"Account_Domain","Account_Name",ComputerName,EventCode,EventType,"Group_Domain","Group_Name",Keywords,LogName,"Logon_ID",Message,OpCode,Privileges,RecordNumber,"Security_ID",SourceName,TaskCategory,Type,eventtype,host,index,linecount,punct,source,sourcetype,"splunk_server","splunk_server_group",tag,"tag::eventtype","_raw","_time"
+"DESKTOP-LOEK43C","JC
+-","DESKTOP-LOEK43C",4732,0,Builtin,Administrators,"Audit Success",Security,0x6CE4D,"A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1001
+	Account Name:		JC
+	Account Domain:		DESKTOP-LOEK43C
+	Logon ID:		0x6CE4D
+
+Member:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1003
+	Account Name:		-
+
+Group:
+	Security ID:		S-1-5-32-544
+	Group Name:		Administrators
+	Group Domain:		Builtin
+
+Additional Information:
+	Privileges:		-",Info,"-",14551,"S-1-5-21-3394884509-2193508422-1494762754-1001
+S-1-5-21-3394884509-2193508422-1494762754-1003
+S-1-5-32-544","Microsoft Windows security auditing.","Security Group Management",Information,,"DESKTOP-LOEK43C","windows_security",30,"//_::._====-=___.===_=__==______-__.\r\r:\rt_:tt-----","WinEventLog:Security","WinEventLog:Security",jcserver,,,,"12/27/2025 01:23:45.038 AM
+LogName=Security
+EventCode=4732
+EventType=0
+ComputerName=DESKTOP-LOEK43C
+SourceName=Microsoft Windows security auditing.
+Type=Information
+RecordNumber=14551
+Keywords=Audit Success
+TaskCategory=Security Group Management
+OpCode=Info
+Message=A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1001
+	Account Name:		JC
+	Account Domain:		DESKTOP-LOEK43C
+	Logon ID:		0x6CE4D
+
+Member:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1003
+	Account Name:		-
+
+Group:
+	Security ID:		S-1-5-32-544
+	Group Name:		Administrators
+	Group Domain:		Builtin
+
+Additional Information:
+	Privileges:		-","2025-12-27T09:23:45.038+0000"
+"DESKTOP-LOEK43C","JC
+-","DESKTOP-LOEK43C",4732,0,Builtin,Administrators,"Audit Success",Security,0x6CE4D,"A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1001
+	Account Name:		JC
+	Account Domain:		DESKTOP-LOEK43C
+	Logon ID:		0x6CE4D
+
+Member:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1002
+	Account Name:		-
+
+Group:
+	Security ID:		S-1-5-32-544
+	Group Name:		Administrators
+	Group Domain:		Builtin
+
+Additional Information:
+	Privileges:		-",Info,"-",14550,"S-1-5-21-3394884509-2193508422-1494762754-1001
+S-1-5-21-3394884509-2193508422-1494762754-1002
+S-1-5-32-544","Microsoft Windows security auditing.","Security Group Management",Information,,"DESKTOP-LOEK43C","windows_security",30,"//_::._====-=___.===_=__==______-__.\r\r:\rt_:tt-----","WinEventLog:Security","WinEventLog:Security",jcserver,,,,"12/27/2025 01:22:28.308 AM
+LogName=Security
+EventCode=4732
+EventType=0
+ComputerName=DESKTOP-LOEK43C
+SourceName=Microsoft Windows security auditing.
+Type=Information
+RecordNumber=14550
+Keywords=Audit Success
+TaskCategory=Security Group Management
+OpCode=Info
+Message=A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1001
+	Account Name:		JC
+	Account Domain:		DESKTOP-LOEK43C
+	Logon ID:		0x6CE4D
+
+Member:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1002
+	Account Name:		-
+
+Group:
+	Security ID:		S-1-5-32-544
+	Group Name:		Administrators
+	Group Domain:		Builtin
+
+Additional Information:
+	Privileges:		-","2025-12-27T09:22:28.308+0000"
+"DESKTOP-LOEK43C","JC
+-","DESKTOP-LOEK43C",4732,0,Builtin,Administrators,"Audit Success",Security,0xD3E80,"A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1001
+	Account Name:		JC
+	Account Domain:		DESKTOP-LOEK43C
+	Logon ID:		0xD3E80
+
+Member:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1002
+	Account Name:		-
+
+Group:
+	Security ID:		S-1-5-32-544
+	Group Name:		Administrators
+	Group Domain:		Builtin
+
+Additional Information:
+	Privileges:		-",Info,"-",6011,"S-1-5-21-3394884509-2193508422-1494762754-1001
+S-1-5-21-3394884509-2193508422-1494762754-1002
+S-1-5-32-544","Microsoft Windows security auditing.","Security Group Management",Information,,"DESKTOP-LOEK43C","windows_security",30,"//_::._====-=___.===_=__==______-__.\r\r:\rt_:tt-----","WinEventLog:Security","WinEventLog:Security",jcserver,,,,"12/26/2025 12:13:20.247 AM
+LogName=Security
+EventCode=4732
+EventType=0
+ComputerName=DESKTOP-LOEK43C
+SourceName=Microsoft Windows security auditing.
+Type=Information
+RecordNumber=6011
+Keywords=Audit Success
+TaskCategory=Security Group Management
+OpCode=Info
+Message=A member was added to a security-enabled local group.
+
+Subject:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1001
+	Account Name:		JC
+	Account Domain:		DESKTOP-LOEK43C
+	Logon ID:		0xD3E80
+
+Member:
+	Security ID:		S-1-5-21-3394884509-2193508422-1494762754-1002
+	Account Name:		-
+
+Group:
+	Security ID:		S-1-5-32-544
+	Group Name:		Administrators
+	Group Domain:		Builtin
+
+Additional Information:
+	Privileges:		-","2025-12-26T08:13:20.247+0000"
