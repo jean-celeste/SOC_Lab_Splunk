@@ -485,13 +485,13 @@ index=windows_security EventCode=4625
 
 After creating all alerts, verify:
 
-- [ ] All 5 alerts created successfully
-- [ ] Each alert has correct search query
-- [ ] Schedule configured (1-5 minutes)
-- [ ] Summary index action enabled
-- [ ] Alerts trigger when corresponding attack is executed
-- [ ] Alert results appear in Triggered Alerts
-- [ ] Summary index contains alert data
+- [/] All 5 alerts created successfully
+- [/] Each alert has correct search query
+- [/] Schedule configured (1-5 minutes)
+- [/] Summary index action enabled
+- [/] Alerts trigger when corresponding attack is executed
+- [/] Alert results appear in Triggered Alerts
+- [/] Summary index contains alert data
 
 ---
 
