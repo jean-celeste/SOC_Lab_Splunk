@@ -15,7 +15,7 @@
 **Alert Name:** "Suspicious PowerShell Execution Detected"  
 **Attack Vector:** Encoded PowerShell commands executed on Windows 10 (192.168.1.5) using base64-encoded strings to obfuscate malicious commands (e.g., (iex) `powershell -enc SQBFAFgA`)
 
-> **Severity Justification:** Attack technique indicates execution of obfuscated commands. Attack status: in progress (commands being executed). Target: Windows 10 endpoint. Impact: High - PowerShell execution with obfuscation indicates potential malware execution, data exfiltration, or lateral movement. Encoded commands bypass basic signature detection and require immediate investigation.
+> **Severity Justification:** Attack technique indicates execution of obfuscated commands. Attack status: in progress. Target: Windows 10 endpoint. Impact: High - PowerShell execution with obfuscation indicates potential malware execution, data exfiltration, or lateral movement. Encoded commands bypass basic signature detection and require immediate investigation. This represents a confidentiality, integrity, and availability risk as obfuscated execution can lead to system compromise, data theft, or further attack progression.
 
 ### Related Playbooks
 

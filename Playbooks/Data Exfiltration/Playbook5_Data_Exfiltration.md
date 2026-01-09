@@ -15,7 +15,7 @@
 **Alert Name:** "Data Exfiltration Detection"  
 **Attack Vector:** Outbound network connections from Windows 10 (192.168.1.5) to Kali Linux (192.168.1.4) on non-standard ports (8080, 4444, 8001-8010) using PowerShell and network tools
 
-> **Severity Justification:** Attack technique indicates data exfiltration activity. Attack status: in progress (outbound connections being established). Target: Windows 10 endpoint making connections to external system. Impact: High - Data exfiltration indicates confidentiality breach, potential data theft, and ongoing compromise. Non-standard ports indicate malicious intent. If sensitive data (PII, credentials, financial) is confirmed, severity escalates to Critical.
+> **Severity Justification:** Attack technique indicates data exfiltration activity. Attack status: in progress. Target: Windows 10 endpoint making connections to external system. Impact: High - Data exfiltration indicates confidentiality breach, potential data theft, and ongoing compromise. Non-standard ports indicate malicious intent. This represents a severe confidentiality risk as data is being transferred outside the network. If sensitive data (PII, credentials, financial) is confirmed, severity escalates to Critical.
 
 ### Related Playbooks
 

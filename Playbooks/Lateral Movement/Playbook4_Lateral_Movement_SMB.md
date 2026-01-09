@@ -15,7 +15,7 @@
 **Alert Name:** "Lateral Movement Detection (SMB)"  
 **Attack Vector:** SMB network logons from Kali Linux (192.168.1.4) to Windows 10 (192.168.1.5) using `smbclient` to access network shares
 
-> **Severity Justification:** Attack technique indicates lateral movement activity. Attack status: in progress (network connections being established). Target: Windows 10 endpoint via SMB shares. Impact: High - Lateral movement enables attackers to access additional systems and resources, potentially leading to data access, privilege escalation, or further network compromise. SMB access can be used to enumerate shares, access files, and move through the network.
+> **Severity Justification:** Attack technique indicates lateral movement activity. Attack status: in progress. Target: Windows 10 endpoint via SMB shares. Impact: High - Lateral movement enables attackers to access additional systems and resources, potentially leading to data access, privilege escalation, or further network compromise. SMB access can be used to enumerate shares, access files, and move through the network. This represents a confidentiality and integrity risk as unauthorized network access can lead to data theft, system compromise, or attack progression.
 
 ### Related Playbooks
 

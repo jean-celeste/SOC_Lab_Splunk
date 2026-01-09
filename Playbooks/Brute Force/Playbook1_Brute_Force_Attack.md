@@ -15,6 +15,8 @@
 **Alert Name:** "Brute Force Attack Detected"  
 **Attack Vector:** RDP brute force from Kali Linux (192.168.1.4) against Windows 10 (192.168.1.5) using Hydra with rockyou.txt wordlist
 
+> **Severity Justification:** Attack technique indicates credential access attempt. Attack status: in progress. Target: Windows 10 endpoint via RDP. Impact: Medium - Multiple failed authentication attempts indicate active credential access attack. If successful, this could lead to unauthorized access, privilege escalation, lateral movement, or data exfiltration. Attack is in progress but not yet successful, affecting a single system. If attack succeeds (Event ID 4624 detected), severity escalates to High or Critical.
+
 ### Related Playbooks
 
 **If successful logon detected (Event ID 4624 from attacker IP):**
@@ -152,7 +154,7 @@ index=windows_security EventCode=4624 Source_Network_Address="<IP_FROM_STEP_2A>"
 | table Account_Name, Logon_Type, Source_Network_Address, count
 ```
 
-> **Learning Note:** I check these queries separately and manually correlate the results. This aligns with our [correlation methodology policy](../../Phase8_Incident_Response_Playbooks.md#-correlation-methodology-manual-vs-automated) - manual correlation is the preferred approach for this homelab. Automated `join` commands are reserved for offline investigation and threat hunting only.
+> **Learning Note:** I check these queries separately and manually correlate the results. I'll explore using `join` commands to automatically correlate brute force attempts with successful logons in a single query.
 
 **If Event ID 4624 appears with the same source IP as brute force attempts, the attack may have succeeded. Escalate immediately.**
 

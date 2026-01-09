@@ -15,7 +15,7 @@
 **Alert Name:** "Privilege Escalation Detection"  
 **Attack Vector:** Local user account (`testuser`) added to Administrators group on Windows 10 (192.168.1.5) using `net localgroup administrators` command
 
-> **Severity Justification:** Attack technique indicates successful privilege escalation. Attack status: succeeded (user added to Administrators group). Target: Windows 10 endpoint. Impact: Critical - Administrative access grants full system control, enabling persistence mechanisms, data access, security control modification, and lateral movement. This is always CRITICAL because administrative access equals complete system compromise.
+> **Severity Justification:** Attack technique indicates successful privilege escalation. Attack status: succeeded. Target: Windows 10 endpoint. Impact: Critical - Administrative access grants full system control, enabling persistence mechanisms, data access, security control modification, and lateral movement. This is always CRITICAL because administrative access equals complete system compromise, representing severe confidentiality, integrity, and availability risks.
 
 ### Related Playbooks
 
