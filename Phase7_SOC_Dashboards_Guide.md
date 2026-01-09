@@ -298,6 +298,46 @@ index=windows_security EventCode=4625
 
 ---
 
+#### Panel 6: Brute Force Success Correlation (CRITICAL)
+
+**Panel Title:** `Successful Logons After Brute Force Attempts`
+
+**Search Query:**
+```spl
+index=windows_security (EventCode=4625 OR EventCode=4624)
+| where Source_Network_Address != "-" AND Source_Network_Address != ""
+| eval event_type=case(EventCode=4624, "Successful Logon", EventCode=4625, "Failed Logon", 1=1, "Other")
+| stats count, values(event_type) as event_types by Source_Network_Address, Account_Name
+| where mvcount(event_types) > 1 OR event_types="Successful Logon"
+| eval status=if(match(event_types, "Successful Logon"), "CRITICAL: Attack Succeeded", "Monitoring")
+| sort -count
+```
+
+**Visualization:** Table
+**Format:** Table
+**Time Range:** Last 24 hours
+
+**Note:** This panel identifies if brute force attacks succeeded by correlating failed (4625) and successful (4624) logons from the same source IP. If successful logons appear, escalate immediately.
+
+---
+
+#### Panel 7: Total Failed Attempts (Single Value)
+
+**Panel Title:** `Total Failed Login Attempts (Last 24 Hours)`
+
+**Search Query:**
+```spl
+index=windows_security EventCode=4625
+| where Source_Network_Address != "-" AND Source_Network_Address != ""
+| stats count
+```
+
+**Visualization:** Single Value
+**Format:** Number
+**Time Range:** Last 24 hours
+
+---
+
 ## 🔴 Dashboard 3: PowerShell Activity Dashboard
 
 ### Step 1: Create the Dashboard
