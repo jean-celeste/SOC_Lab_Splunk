@@ -89,12 +89,7 @@ index=sysmon EventCode=3
 
 > **Learning Note:** Initially, I wasn't sure which ports to exclude. I learned that ports 53 (DNS), 80 (HTTP), and 443 (HTTPS) are usually legitimate, so I filter those out. I also exclude 3389 (RDP) and 445 (SMB) since those are common in my lab environment. This aligns with our [port filtering guidance](../../Phase8_Incident_Response_Playbooks.md#-port-filtering-context-dependent-logic) - ports 3389 and 445 are excluded in data exfiltration detection because they're legitimate services in this environment, but they would be monitored in brute force (RDP) or lateral movement (SMB) scenarios. The key is identifying connections to unusual ports that could indicate data exfiltration or C2 communication.
 
-**Field Extraction Decision Process:**
-1. **Try extracted field first:** `| stats count by Image, DestinationIp, DestinationPort`
-2. **If field is empty/incorrect:** Use `rex` to extract from `_raw`: `| rex field=_raw "pattern"`
-3. **If neither works:** Check `fieldsummary` for actual field names: `| fieldsummary`
-4. **Verify field names:** Use `| table *` or `| head 1 | spath` to see all available fields
-5. **Note:** Sysmon Event ID 3 typically has well-extracted fields, but verify in your environment
+> **Note:** Field names may vary in your environment. See [Field Naming and Extraction](../../Phase8_Incident_Response_Playbooks.md#-field-naming-and-extraction) for guidance on verifying field names using `fieldsummary`. Sysmon Event ID 3 typically has well-extracted fields, but verify in your environment.
 
 **What to Look For:**
 - Outbound connections to unusual ports (not 53, 80, 443, 3389, 445)

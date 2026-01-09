@@ -104,14 +104,9 @@ index=windows_security EventCode=4732 Group_Name="Administrators"
 | eval description="User " + Account_Name + " added member to " + Group_Name + " group"
 ```
 
-> **Learning Note:** Initially, I had to verify the correct field names in my environment. Using `fieldsummary` revealed that my Splunk setup uses `Account_Name`, `Account_Domain`, `Group_Name`, and `Group_Domain` rather than `SubjectUserName` or `MemberName`. Always verify field names using `fieldsummary` or by examining actual event data before creating detection queries. The member name (who was added) may not appear directly in extracted fields - use `rex` to extract from `_raw` if needed.
+> **Learning Note:** Initially, I had to verify the correct field names in my environment. Using `fieldsummary` revealed that my Splunk setup uses `Account_Name`, `Account_Domain`, `Group_Name`, and `Group_Domain` rather than `SubjectUserName` or `MemberName`. The member name (who was added) may not appear directly in extracted fields - use `rex` to extract from `_raw` if needed.
 
-**Field Extraction Decision Process:**
-1. **Try extracted field first:** `| stats count by Account_Name, Group_Name`
-2. **If field is empty/incorrect:** Use `rex` to extract from `_raw`: `| rex field=_raw "Member:\s+Security ID:\s+(?<member_sid>[^\r\n]+)"`
-3. **If neither works:** Check `fieldsummary` for actual field names: `| fieldsummary`
-4. **Verify field names:** Use `| table *` or `| head 1 | spath` to see all available fields
-5. **Note:** For Event ID 4732, the member name (who was added) often requires `rex` extraction from `_raw` field
+> **Note:** Field names may vary in your environment. See [Field Naming and Extraction](../../Phase8_Incident_Response_Playbooks.md#-field-naming-and-extraction) for guidance on verifying field names using `fieldsummary`.
 
 **What to Look For:**
 - Event ID 4732 or 4728 (group membership changes)
@@ -319,39 +314,9 @@ Get-LocalGroupMember -Group "Administrators" |
 - Check for related security events (logons, credential usage, process execution)
 - Document all findings
 
-**Field Discovery Process (If Queries Don't Work):**
+> **Note:** If queries don't work, see [Field Naming and Extraction](../../Phase8_Incident_Response_Playbooks.md#-field-naming-and-extraction) for the standard field discovery process.
 
-If field names don't match, use this process to discover actual field names:
-
-1. **View raw event:**
-   ```spl
-   index=windows_security EventCode=4732
-   | head 1
-   ```
-
-2. **Get field summary:**
-   ```spl
-   index=windows_security EventCode=4732
-   | head 1
-   | fieldsummary
-   ```
-
-3. **View all fields:**
-   ```spl
-   index=windows_security EventCode=4732
-   | head 1
-   | table *
-   ```
-
-4. **If fields are in XML format, use spath:**
-   ```spl
-   index=windows_security EventCode=4732
-   | head 1
-   | spath
-   | table *
-   ```
-
-**Confirmed Field Names for Our Environment:**
+**Confirmed Field Names for This Environment (Event ID 4732):**
 - `Account_Name` - Who made the change (Subject)
 - `Account_Domain` - Domain of the account
 - `Group_Name` - Group that was modified (e.g., "Administrators")

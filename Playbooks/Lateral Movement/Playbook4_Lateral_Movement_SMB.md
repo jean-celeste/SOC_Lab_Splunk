@@ -89,12 +89,7 @@ index=windows_security EventCode=4624 Logon_Type=3
 
 > **Learning Note:** Initially, I was confused about Logon Type 3 vs Logon Type 5. Logon Type 3 indicates network logons (SMB, RPC, etc.), while Logon Type 5 is for service logons (local). I also learned that `Source_Network_Address` can be "-" for local logons, so I must filter those out. Always check that `Source_Network_Address` contains an actual IP address, not "-", when looking for network-based lateral movement.
 
-**Field Extraction Decision Process:**
-1. **Try extracted field first:** `| stats count by Source_Network_Address, Account_Name`
-2. **If field is empty/incorrect:** Use `rex` to extract from `_raw`: `| rex field=_raw "(?i)New Logon:\s+Security ID:\s+[^\r\n]+\s+Account Name:\s+(?<account_name>[^\r\n\t]+)"`
-3. **If neither works:** Check `fieldsummary` for actual field names: `| fieldsummary`
-4. **Verify field names:** Use `| table *` or `| head 1 | spath` to see all available fields
-5. **Note:** Account name extraction may require `rex` for accuracy, especially in complex event structures
+> **Note:** Field names may vary in your environment. See [Field Naming and Extraction](../../Phase8_Incident_Response_Playbooks.md#-field-naming-and-extraction) for guidance on verifying field names using `fieldsummary`. Account name extraction may require `rex` for accuracy, especially in complex event structures.
 
 **What to Look For:**
 - Multiple network logons (Event ID 4624, Logon Type 3)

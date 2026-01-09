@@ -86,11 +86,7 @@ index=sysmon EventCode=1 Image="*powershell.exe" CommandLine="*-enc*"
 
 > **Learning Note:** Initially, I had to verify that Sysmon was capturing the full command line, including encoded parameters. The `CommandLine` field in Sysmon Event ID 1 contains the complete command, even when base64-encoded. Always verify Sysmon is properly configured to capture command-line arguments.
 
-**Field Extraction Decision Process:**
-1. **Try extracted field first:** `| stats count by Image, CommandLine, User`
-2. **If field is empty/incorrect:** Use `rex` to extract from `_raw`: `| rex field=_raw "pattern"`
-3. **If neither works:** Check `fieldsummary` for actual field names: `| fieldsummary`
-4. **Verify field names:** Use `| table *` or `| head 1 | spath` to see all available fields
+> **Note:** Field names may vary in your environment. See [Field Naming and Extraction](../../Phase8_Incident_Response_Playbooks.md#-field-naming-and-extraction) for guidance on verifying field names using `fieldsummary`.
 
 **What to Look For:**
 - PowerShell process creation (Event ID 1)

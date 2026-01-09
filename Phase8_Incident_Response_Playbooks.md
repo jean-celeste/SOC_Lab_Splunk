@@ -187,6 +187,73 @@ Before executing recovery actions, consider:
 
 ---
 
+## 📋 Field Naming and Extraction
+
+### Important: Field Names Vary by Environment
+
+**Critical Understanding:** Field names in Splunk can vary between environments based on:
+- Data source configuration (Windows Event Logs, Sysmon, etc.)
+- Splunk version and field extraction rules
+- Index configuration and sourcetype settings
+- Custom field extractions or transforms
+
+**Always verify field names in your environment before using queries from these playbooks.**
+
+### Field Extraction Decision Process
+
+When a query doesn't work as expected, follow this process:
+
+1. **Try extracted field first:** Use the field name as shown in the playbook queries
+   - Example: `| stats count by Account_Name, Source_Network_Address`
+
+2. **If field is empty/incorrect:** Use `rex` to extract from `_raw` field
+   - Example: `| rex field=_raw "Account Name:\s+(?<account_name>[^\r\n]+)"`
+
+3. **If neither works:** Check `fieldsummary` for actual field names
+   - Example: `index=windows_security EventCode=4625 | fieldsummary`
+
+4. **Verify field names:** Use `table *` or `spath` to see all available fields
+   - Example: `index=windows_security EventCode=4625 | head 1 | table *`
+   - Example: `index=windows_security EventCode=4625 | head 1 | spath`
+
+### Common Field Names in This Homelab
+
+**Windows Security Event Logs:**
+- `Source_Network_Address` (source IP address - **not** `src_ip`)
+- `Account_Name`, `Account_Domain` (account information)
+- `Group_Name`, `Group_Domain` (group membership)
+- `Logon_Type` (type of logon: 3 = network, 10 = RDP)
+- `EventCode` (Windows Event ID)
+
+**Sysmon Event Logs:**
+- `Image` (process image path)
+- `CommandLine` (full command line)
+- `User` (user context)
+- `ProcessId`, `ParentProcessId` (process relationships)
+- `DestinationIp`, `DestinationPort` (network connections)
+- `TargetFilename` (file operations)
+- `EventCode` (Sysmon Event ID: 1 = process creation, 3 = network connection, 11 = file creation)
+
+**Note:** The member name (who was added to a group) in Event ID 4732 often requires `rex` extraction from `_raw` field, as it may not appear in extracted fields.
+
+### Field Name Discovery Commands
+
+**Quick Field Discovery:**
+```spl
+# See all fields for an event
+index=windows_security EventCode=4625 | head 1 | table *
+
+# Get field summary
+index=windows_security EventCode=4625 | fieldsummary
+
+# Extract from raw if needed
+index=windows_security EventCode=4732 | rex field=_raw "Member:\s+Security ID:\s+(?<member_sid>[^\r\n]+)"
+```
+
+**Best Practice:** When adapting these playbooks to your environment, start by running `fieldsummary` on your actual data to verify field names before using the queries.
+
+---
+
 ## 📊 Playbook Overview
 
 We'll create playbooks for 5 incident types:

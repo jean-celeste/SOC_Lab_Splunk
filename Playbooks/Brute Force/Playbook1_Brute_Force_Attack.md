@@ -81,13 +81,9 @@ index=windows_security EventCode=4625
 | sort -count
 ```
 
-> **Learning Note:** Initially, I had trouble finding the right field name for source IP. I used `fieldsummary` to discover it was `Source_Network_Address` in my environment, not `src_ip` as some documentation suggested. Always verify field names in your specific Splunk setup!
+> **Learning Note:** Initially, I had trouble finding the right field name for source IP. I used `fieldsummary` to discover it was `Source_Network_Address` in my environment, not `src_ip` as some documentation suggested. 
 
-**Field Extraction Decision Process:**
-1. **Try extracted field first:** `| stats count by Account_Name, Source_Network_Address`
-2. **If field is empty/incorrect:** Use `rex` to extract from `_raw`: `| rex field=_raw "pattern"`
-3. **If neither works:** Check `fieldsummary` for actual field names: `| fieldsummary`
-4. **Verify field names:** Use `| table *` or `| head 1 | spath` to see all available fields
+> **Note:** Field names may vary in your environment. See [Field Naming and Extraction](../../Phase8_Incident_Response_Playbooks.md#-field-naming-and-extraction) for guidance on verifying field names using `fieldsummary`.
 
 **What to Look For:**
 - Multiple failed login attempts (Event ID 4625)
