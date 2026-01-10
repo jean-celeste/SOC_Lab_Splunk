@@ -7,7 +7,7 @@ This guide provides comprehensive incident response playbooks for each attack sc
 Before using these playbooks, verify:
 - [/] All 5 attack scenarios have been executed and detected
 - [/] Splunk alerts are configured and triggering (Phase 6)
-- [/] You can access Splunk Web UI at `http://192.168.1.7:8000`
+- [/] You can access Splunk Web UI at `http://<Ubuntu_Server_IP>:8000` (check IP with `ifconfig`)
 - [/] You have admin access to Windows 10 VM for containment actions
 - [ ] You understand the MITRE ATT&CK framework mapping for each scenario
 
@@ -315,7 +315,7 @@ We'll create playbooks for 5 incident types:
 
 3. **Prepare tools and access:**
    - Admin access to Windows 10 VM (PowerShell)
-   - Access to Splunk Web UI (`http://192.168.1.7:8000`)
+   - Access to Splunk Web UI (`http://<Ubuntu_Server_IP>:8000`)
    - Network access to block IPs via firewall
 
 4. **Security controls in place:**
@@ -616,7 +616,7 @@ Document the following:
 
 3. **Prepare tools and access:**
    - Admin access to Windows 10 VM (PowerShell)
-   - Access to Splunk Web UI (`http://192.168.1.7:8000`)
+   - Access to Splunk Web UI (`http://<Ubuntu_Server_IP>:8000`)
    - Base64 decoding tools/scripts ready
 
 4. **Security controls in place:**
